@@ -31,8 +31,17 @@ client.on("connected", (address, port) => {
     client.action("The bot has connected on" + address + ":" + port)
 })
 
+/*Events*/
+client.on("cheer", (channel, username, userstate, message) => {
+  try {
+      let cheerFile = require(`./events/cheer.js`)
+      cheerFile.run(channel, username, userstate, message)
+  } catch (err) {
+      return;
+  }
+});
 
-
+/*Commands*/
 client.on("chat", (channel, user, message, self) => {
     if (self) return;
 
